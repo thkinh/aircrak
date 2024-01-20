@@ -44,25 +44,23 @@ while(choose!=-1):
         cmd = "ifconfig " + str(wifi_card[whichcard]) + " up"
         choose = 0
         #Sau sua thanh subprocess.run()
-        print(cmd)
-        pause_func(1090000)
+        subprocess.call(cmd, shell = True)
     if choose == 2:
         if wifi_card:
             for card in wifi_card:
                 print(card)
             whichcard = int(input("Nhap card can chon: "))
             cmd = "airmon-ng start " + str(wifi_card[whichcard])
-            print(cmd)
-            pause_func(8888888)
+            subprocess.call(cmd, shell = True)
+            wifi_card[whichcard] += "mon"
         else:
             print("No wifi card captured")
-            pause_func(7777777)
+            pause_func(999999)
     if choose ==  3:
         if wifi_card:
             for card in wifi_card:
                 print(card)
             whichcard = int(input("Nhap card can chon: "))
             cmd = "airodump-ng " + str(wifi_card[whichcard])
-            print(cmd)
-            pause_func(8888888)
+            subprocess.call(cmd, shell = True, timeout = 10)
 buffer.close()
