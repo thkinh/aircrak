@@ -2,6 +2,7 @@ import sys
 from io import StringIO
 import os
 import subprocess
+from threading import Timer
 bssid = ""
 chanel = ""
 cmd = ""
@@ -28,6 +29,16 @@ def get_buffer():
     print(buffer.getvalue())
     print("Succesfully wrote into buffer: ")
     cmd = input("Press ENTER key...")
+
+def Run_With_timeout(cmd, time):
+    try:
+        subprocess.call(cmd, shell = True, timeout = time)
+    except subprocess.TimeoutExpired():
+        print(f"timeout expired for command: {cmd}")
+    except Exception as E:
+        print(f"An error occured: {e}")
+    finally:
+        print("End")
 
 
 get_buffer()
@@ -56,11 +67,16 @@ while(choose!=-1):
         else:
             print("No wifi card captured")
             pause_func(999999)
+        choose = 0
     if choose ==  3:
         if wifi_card:
             for card in wifi_card:
                 print(card)
             whichcard = int(input("Nhap card can chon: "))
-            cmd = "airodump-ng " + str(wifi_card[whichcard])
-            subprocess.call(cmd, shell = True, timeout = 10)
+            cmd = "airodump-ng "+ wifi_card[whichcard] 
+            Run_With_timeout(cmd, 5)
+        choose = 0
+        print("Da toi day")
+        pause_func(1234567)
+            
 buffer.close()
