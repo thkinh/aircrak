@@ -36,7 +36,7 @@ def Run_With_timeout(cmd, time):
     except subprocess.TimeoutExpired():
         print(f"timeout expired for command: {cmd}")
     except Exception as E:
-        print(f"An error occured: {e}")
+        print(f"An error occured: {E}")
     finally:
         print("End")
 
