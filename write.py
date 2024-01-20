@@ -58,5 +58,11 @@ while(choose!=-1):
             print("No wifi card captured")
             pause_func(7777777)
     if choose ==  3:
-        
+        if wifi_card:
+            for card in wifi_card:
+                print(card)
+            whichcard = int(input("Nhap card can chon: "))
+            cmd = "airodump-ng " + str(wifi_card[whichcard])
+            print(cmd)
+            pause_func(8888888)
 buffer.close()
